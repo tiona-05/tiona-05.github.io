@@ -1,0 +1,360 @@
+*{
+    box-sizing: border-box;
+    max-width: auto;
+}
+
+html{
+    scroll-behavior: smooth; /* 啟用平滑捲動 */
+}
+
+body{
+    padding-top: 50px;
+    background-color: #fff9f4;
+    margin: 0px;
+}
+
+header{
+    background: radial-gradient(circle, #fff9f4 40%, #f6d5ce 100%);
+    
+    color: #b98272;
+    text-align: center;
+    margin: 0px;
+    padding: 30px 20px;
+}
+
+nav{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 2;
+
+    background-color: #fceae5;
+    text-align: center;
+    font-family: Arial;
+}
+
+/* [特效] 導覽列連結的平滑過渡準備 — 使用 transition + all 讓文字顏色與狀態改變時能柔和漸變 */
+nav a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #b98272;
+    display: inline-block;
+    padding: 14px 16px;
+    border-radius: 30px;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+/* [特效] 滑鼠移到導覽列連結時文字變色與產生背景圓角塊 — 使用 pseudo-element (::before) 與 absolute 定位 */
+nav a:hover {
+    color: #fff9f4;
+}
+
+nav a:hover::before {
+    content: '';
+    position: absolute;
+    top: 7px;    
+    bottom: 7px;
+    left: 4px;
+    right: 4px;
+    background-color: #eabeb5;
+    border-radius: 20px; 
+    z-index: -1; 
+}
+
+.top{
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.box1{
+    width: 90%;
+    max-width: 1000px;
+    height: 300px;
+    background-color: #ffffff;
+    border-radius: 25px; 
+    overflow: hidden;
+    border: 4px solid #fff9f4;
+}
+
+.box1 img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.box2{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.aboutme{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    outline: 2px auto #eabeb5;
+    padding: 3px;
+    object-fit: cover;
+}
+
+h2{
+    margin-top: 10px;
+    color: #936B5D;
+}
+
+.content{
+    margin-bottom: 0;
+    color: #936B5D;
+}
+
+.content ul {
+    padding-left: 15px;
+    margin: 10px 0;
+}
+
+.content li {
+    margin-bottom: 8px;
+    line-height: 1;
+}
+
+.slogan{
+    font-style: italic;
+    font-weight: bold;
+    color: #b98272;
+    padding-top: 10px;
+    padding-bottom: 25px;
+    margin: 10px;
+}
+
+/* [特效] 卡片右下角查看更多按鈕的平滑過渡準備 — 使用 transition + all 讓狀態改變時能柔和漸變 */
+.checkmore{
+    display: inline-block;
+    background-color: #fceee9;
+    color: #e2a699;
+    padding: 5px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+}
+
+/* [特效] 滑鼠移到查看更多按鈕時顏色漸變 — 使用 transition 讓背景與文字顏色平滑轉換 */
+.checkmore:hover {
+    background-color: #eabeb5;
+    color: #fff9f4;
+}
+
+section{
+    scroll-margin-top: 70px;
+    color: #936B5D;
+}
+
+.card{
+    width: 90%;
+    max-width: 1000px;
+    background-color: #fff9f4;
+    border: 2px dashed #eabeb5;
+    background-size: cover;
+    padding: 20px 30px;
+    margin:30px auto;
+    border-radius: 20px;
+    position: relative;
+}
+
+.card:nth-of-type(1) {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.skill{
+    margin: 15px;
+}
+
+.skill-item{
+    margin: 15px;
+}
+
+.skill-name{
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #936B5D;
+}
+
+.bar{
+    width: 100%;
+    max-width: 400px;
+    height: 12px;
+    background-color: #fceee9;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+/* [特效] 技能進度條的長度增長動畫 — 使用 @keyframes 讓進度條從 0% 展開至目標寬度 (--w) */
+.progress-fill{
+    width: var(--w);
+    height: 100%;
+    background-color: #eabeb5;
+    border-radius: 6px;
+    animation:growProgress 1s ease-in-out;
+}
+
+/* 定義動畫：從 0% 長到原本設定的變數寬度 (--w) */
+@keyframes growProgress {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: var(--w);
+    }
+}
+
+.exp-preview-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.exp-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #ffffff;
+    border: 1.5px solid #eabeb5;
+    padding: 12px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #444;
+    transition: all 0.3s ease;
+}
+
+/* [特效] 個別經歷小卡的平滑過渡準備 — 使用 transition 讓狀態改變時能柔和漸變 */
+.exp-item:hover {
+    transform: translateX(5px); 
+    background-color: #fff5ee;
+    box-shadow: 0 4px 10px rgba(147, 107, 93, 0.1);
+}
+
+.exp-tag {
+    background-color: #eabeb5;
+    color: white;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.exp-title {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.more-container {
+    padding: 10px;
+    text-align: right;
+    margin-top: 15px;
+}
+
+/* [特效] 查看更多按鈕的平滑過渡準備 — 使用 transition 讓顏色變化更柔和 */
+.checkmore {
+    color: #936B5D;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+/* [特效] 滑鼠移到查看更多按鈕時背景色與文字對調 */
+.checkmore:hover {
+    background-color: #936B5D;
+    color: #fceee9;
+}
+
+.contact{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 10px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.contact-label {
+    font-weight: 600;
+    color: #936B5D;
+    margin: 10px;
+}
+
+/* [特效] 聯絡按鈕的平滑過渡準備 — 使用 transition + all 讓狀態改變時能柔和漸變 */
+.contact-btn {
+    display: inline-block;
+    width: fit-content;
+    background-color: #eabeb5;
+    color: #fff9f4;
+    padding: 4px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    
+    transition: all 0.3s ease;
+}
+
+/* [特效] 滑鼠移到聯絡按鈕時背景變深並往上浮動 — 使用 transform: translateY 創造懸浮立體感 */
+.contact-btn:hover {
+    background-color: #b98272;
+    color: #fff9f4;
+    transform: translateY(-2px);
+}
+
+/* 社群按鈕容器（橫向排列） */
+.social-links {
+    display: flex;
+    flex-wrap: wrap;    /* 手機版自動換行 */
+    gap: 20px;
+}
+
+/* [特效] 社群按鈕的平滑過渡準備 — 使用 transition + all 讓所有屬性能柔和漸變 */
+.social-btn {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #fceee9;
+    color: #936B5D;
+    border: 1.5px solid #eabeb5;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    
+    transition: all 0.3s ease;
+}
+
+/* [特效] 滑鼠移到社群按鈕時背景變色並放大 — 使用 transform: scale(1.1) 創造彈性凸顯感 */
+.social-btn:hover {
+    background-color: #eabeb5;
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+footer{
+    background-color: #fceae5;
+    text-align: center;
+    padding: 10px;
+    color: #936B5D;
+}
+

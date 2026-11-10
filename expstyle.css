@@ -1,0 +1,284 @@
+*{
+    box-sizing: border-box;
+    max-width: auto;
+}
+
+body{
+    background-color: #fff9f4;
+    margin: 0px;
+}
+
+nav{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 2;
+
+    background-color: #fceae5;
+    text-align: center;
+    font-family: Arial;
+}
+
+/* [特效] 導覽列連結的平滑過渡準備 — 使用 transition + all 讓文字顏色與狀態改變時能柔和漸變 */
+nav a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #b98272;
+    display: inline-block;
+    padding: 14px 16px;
+    border-radius: 30px;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+/* [特效] 滑鼠移到導覽列連結時文字變色與產生背景圓角塊 — 使用 pseudo-element (::before) 與 absolute 定位 */
+nav a:hover {
+    color: #fff9f4;
+}
+
+nav a:hover::before {
+    content: '';
+    position: absolute;
+    top: 7px;    
+    bottom: 7px;
+    left: 4px;
+    right: 4px;
+    background-color: #eabeb5;
+    border-radius: 20px; 
+    z-index: -1; 
+}
+
+section{
+    scroll-margin-top: 80px;
+    color: #936B5D;
+}
+
+section:first-of-type {
+    margin-top: 80px;
+}
+
+h2{
+    margin-top: 10px;
+    color: #936B5D;
+}
+
+h3 {
+    color: #936B5D;
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.card{
+    width: 90%;
+    max-width: 1000px;
+    background-color: #fff9f4;
+    border: 2px dashed #eabeb5;
+    background-size: cover;
+    padding: 20px 30px;
+    margin:30px auto;
+    border-radius: 20px;
+}
+
+.tag {
+    background-color: #eabeb5;
+    color: #ffffff;
+    font-size: 13px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-right: 8px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.information {
+    text-align: right;
+    margin-top: 15px;
+}
+
+/* [特效] 資訊標籤的平滑過渡準備 — 使用 transition 讓未來狀態改變（如 hover）時所有屬性能柔和漸變 */
+.information a {
+    display: inline-block;
+    background-color: #fceee9;
+    color: #e2a699;
+    padding: 6px 18px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease; /* 特效設定：所有屬性花 0.3 秒平滑過渡 */
+}
+
+.information a:hover {
+    background-color: #eabeb5;
+    color: #ffffff;
+}
+
+.card a{
+    color: #e2a699;
+    text-decoration: none;
+}
+
+.card h3 {
+    color: #936B5D;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.card p {
+    margin-top: 0;
+    line-height: 1.6;
+}
+
+
+.photo-slider {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding: 10px 5px;
+    scroll-snap-type: x mandatory;
+}
+
+
+.photo-slider a {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+}
+
+
+.photo-slider img {
+    width: 280px;         
+    height: 180px;        
+    object-fit: cover;    
+    border-radius: 12px;  
+    border: 2px solid #eabeb5; 
+    box-shadow: 0 4px 8px rgba(147, 107, 93, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: block;
+}
+
+/* [特效] 滑鼠移到圖片或按鈕時微幅放大 — 使用 transition + transform:scale 創造立體感*/
+.photo-slider img:hover {
+    transform: scale(1.02); 
+    box-shadow: 0 6px 12px rgba(147, 107, 93, 0.2);
+}
+
+
+/* --- 燈箱 (Lightbox) 相關樣式 --- */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+}
+
+.lightbox:target {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    cursor: default;
+}
+
+.lightbox-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.lightbox-content img {
+    max-width: 80vw;
+    max-height: 80vh;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.6);
+    object-fit: contain;
+}
+
+/* [特效] 滑鼠移到燈箱切換按鈕時背景平滑變亮 — 使用 transition + background-color */
+.lightbox-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    text-decoration: none;
+    font-size: 28px;
+    padding: 12px 18px;
+    border-radius: 50%;
+    margin: 0 15px;
+    transition: background-color 0.3s;
+    user-select: none;
+}
+
+.lightbox-btn:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #333;
+}
+
+.close-btn {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    background-color: #ffffff;
+    color: #333;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: bold;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.close-btn:hover {
+    background-color: #eabeb5;
+    color: #fff;
+}
+
+/* [特效] 滑鼠移到右下角返回按鈕時顏色漸變 — 使用 transition + all */
+.back{
+    display: inline-block;
+    background-color: #936B5D;
+    color: #fff9f4;
+    padding: 5px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1;
+}
+
+.back:hover {
+    background-color: #eabeb5;
+    color: #fff9f4;
+}
+
+footer{
+    background-color: #fceae5;
+    text-align: center;
+    padding: 10px;
+    color: #936B5D;
+}
